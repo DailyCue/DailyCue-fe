@@ -1,4 +1,3 @@
-import { COLORS } from "@/constants/theme";
 import { StyleSheet, Text, View } from "react-native";
 
 export default function Setting() {
@@ -14,9 +13,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: COLORS.lightGreen,
   },
   font: {
-    fontSize: 50,
+    fontSize: 30,
   }
 })

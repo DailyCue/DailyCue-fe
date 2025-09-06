@@ -1,4 +1,6 @@
+// 기록을 저장하는 뷰
 import { COLORS, FONTS, SIZES } from '@/constants/theme';
+import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { Slider } from "react-native-elements";
@@ -35,6 +37,8 @@ const EmotionRecord: React.FC<EmotionRecordProps> = ({ onRecordAdded }) => {
 
     setStressLevel(5);
     setText('');
+
+    router.push('/main/journal');
   };
 
   return (
@@ -71,7 +75,7 @@ const EmotionRecord: React.FC<EmotionRecordProps> = ({ onRecordAdded }) => {
         style={styles.textInput}
         placeholder="어떤 일이 있었나요?"
         multiline
-        maxLength={80}
+        maxLength={50}
         value={text}
         onChangeText={setText}
       />
@@ -85,18 +89,26 @@ const EmotionRecord: React.FC<EmotionRecordProps> = ({ onRecordAdded }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#333',
-    alignItems: 'center',
+    height: 500,
     justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.white,
+    borderRadius: SIZES.medium,
+    paddingHorizontal: SIZES.small,
+    elevation: 2,
+    shadowColor: COLORS.black,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   slider: {
     width: 270,
     height: 40,
   },
   sliderTrackContainer: {
-    height: 40,
+    height: 50,
     justifyContent: 'center',
-    marginTop: SIZES.base,
+    marginTop: SIZES.small,
   },
   sliderControls: {
     flexDirection: 'column',
@@ -106,8 +118,7 @@ const styles = StyleSheet.create({
   },
   sliderText: { 
     ...FONTS.h1, 
-    color: COLORS.black, 
-    marginHorizontal: SIZES.large, 
+    color: COLORS.black,
     fontWeight: 'bold',
   },
   trackBase: {
@@ -123,30 +134,24 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.darkBlueGray,
     position: 'absolute',
   },
-  textInput: {
-    width: '100%',
-    backgroundColor: COLORS.white,
-    borderRadius: SIZES.medium,
-    paddingHorizontal: SIZES.medium,
-    minHeight: 50,
-    textAlignVertical: 'center',
-    ...FONTS.body,
-    marginTop: SIZES.small,
-  },
-  stressTitle: { 
-    ...FONTS.h3, 
-    color: COLORS.darkGray, 
-    textAlign: 'center', 
-    marginBottom: SIZES.base, 
-    marginTop: SIZES.small 
-  },
   stressExplanation: {
     ...FONTS.h4,
     color: COLORS.darkGray,
     marginBottom: SIZES.medium,
   },
+  textInput: {
+    width: 270,
+    backgroundColor: COLORS.primary,
+    borderRadius: SIZES.medium,
+    paddingHorizontal: SIZES.medium,
+    minHeight: 50,
+    maxHeight: 200,
+    textAlignVertical: 'center',
+    ...FONTS.body,
+    marginTop: SIZES.small,
+  },
   submitButton: { 
-    width: '100%',
+    width: 270,
     backgroundColor: COLORS.secondary, 
     padding: SIZES.medium, 
     borderRadius: SIZES.medium, 

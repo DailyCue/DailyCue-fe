@@ -1,18 +1,22 @@
 import EmotionRecord from "@/components/journal/EmotionRecord";
-import { COLORS, SIZES } from "@/constants/theme";
+import { COLORS } from "@/constants/theme";
 import { useRecords } from "@/hooks/useRecords";
+import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 
 export default function Recording() {
-  const { records, addRecord } = useRecords();
+  const { addRecord } = useRecords();
 
   return (
     <View style={styles.container}>
-      <View style={styles.card}>
-        <EmotionRecord onRecordAdded={addRecord} />
-      </View>
+      <LinearGradient
+        colors={[COLORS.secondary, COLORS.pageBackground]} 
+        locations={[0.3, 0.7]}
+        style={StyleSheet.absoluteFill}
+      />
+      <EmotionRecord onRecordAdded={addRecord} />
       <TouchableOpacity style={styles.closeButton} onPress={() => router.push('/main/journal')}>
         <Text style={styles.closeText}>나가기</Text>
       </TouchableOpacity>
@@ -23,21 +27,9 @@ export default function Recording() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#333',
+    backgroundColor: COLORS.secondary,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  card: {
-    backgroundColor: COLORS.white,
-    borderRadius: SIZES.medium,
-    paddingHorizontal: SIZES.small,
-    marginHorizontal: 35,
-    marginVertical: 5,
-    elevation: 2,
-    shadowColor: COLORS.black,
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
   },
   closeButton: {
     position: 'absolute',

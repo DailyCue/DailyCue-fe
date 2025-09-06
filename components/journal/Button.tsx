@@ -1,33 +1,58 @@
+// 기록 저장 버튼 + 하얀 배경 뷰
 import { COLORS, FONTS, SIZES } from "@/constants/theme";
+import { format } from "date-fns";
 import { router } from "expo-router";
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const Button: React.FC = () => {
+  const count = 123;
+  const currentDate = format(new Date(), 'yyyy.MM.dd');
 
   return (
     <TouchableOpacity
       style={styles.button}
       onPress={() => router.push('/recording')}>
-      <Text style={styles.text}>{`기록을 하거라 하라`}</Text>
+      
+      <View style={{ flexDirection: 'column' }}>
+        <Text style={styles.leftTopContainer}>{currentDate}</Text>
+        <Text style={styles.leftBottomContainer}>오늘 기록을 완료해주세요!</Text>
+      </View>
+      <Text style={styles.rightContainer}>{count} 회</Text>
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   button: {
-    height: 100,
+    height: 90,
+    flexDirection: 'row',
     backgroundColor: COLORS.white,
     borderRadius: SIZES.medium,
+    padding: SIZES.mega,
     marginHorizontal: 35,
     marginBottom: 20,
-    justifyContent: 'center',
     alignItems: 'center',
-    elevation: 2,
+    justifyContent: 'space-between',
+    elevation: 5,
     shadowColor: COLORS.black,
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+  },
+  leftTopContainer: {
+    ...FONTS.h4,
+    paddingVertical: 5,
+  },
+  leftBottomContainer: {
+    ...FONTS.h3,
+    fontWeight: 'bold',
+    paddingVertical: 5,
+    color: COLORS.secondary,
+  },
+  rightContainer: {
+    ...FONTS.h2,
+    fontWeight: 'bold',
   },
   text: {
     ...FONTS.h2,

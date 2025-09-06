@@ -9,16 +9,11 @@ export const COLORS = {
   orange: '#FFB74D',
   green: '#65BC72',
   darkBlue: '#145488',
-  lightGreen: '#E8F5E9',
-  mintGray: '#E8EFEC',
-  beige: '#F9E4B7',
+  lightGray: '#CDCDCD',
   gray: '#A5A5A5',
   darkGray: '#555555',
   black: '#000000',
-  danger: '#DB4437',
   pageBackground: '#F4F6F5',
-  PrimaryText: '#3A3A3A',
-  SecondaryText: '#5E5E5E',
   InactiveIcon: '#B0B0B0',
 };
 

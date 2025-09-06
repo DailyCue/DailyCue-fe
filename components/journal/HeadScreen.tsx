@@ -1,8 +1,10 @@
+// 파란 배경 쪽의 모든 뷰를 포함
 import { COLORS, FONTS, SIZES } from "@/constants/theme";
-import { FontAwesome6, Ionicons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import type { DrawerNavigationProp } from '@react-navigation/drawer';
 import { router, useNavigation } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image } from "react-native-elements";
 
 
 const HeadScreen = () => {
@@ -13,19 +15,23 @@ const HeadScreen = () => {
       <View style={styles.header}>
         <Text style={styles.text1}>DailyCue</Text>
         <TouchableOpacity style={styles.hamburger} onPress={() => navigation.openDrawer()}>
-          <Ionicons name="menu" size={35} />
+          <Ionicons name="menu" size={35} color={COLORS.darkBlueGray} />
         </TouchableOpacity>
       </View>
       <View style={styles.body}>
         <View style={styles.leftBody}>
-          <Text style={styles.text2}>{`데일리큐로\n기록하고\n마음을 공유해요!`}</Text>
+          <Text style={styles.text2}>{`데일리큐로\n기록하고\n서로 공유해요!`}</Text>
           <TouchableOpacity style={styles.goChat} onPress={() => router.push('/main/ai-partner')}>
             <Ionicons name="chatbubbles-outline" size={SIZES.medium} color={COLORS.secondary} />
             <Text style={styles.text3}>ai 채팅가기</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.rightBody}>
-          <FontAwesome6 name='people-roof' size={50} color={COLORS.white}/>
+          {/* <FontAwesome6 name='people-roof' size={50} color={COLORS.white}/> */}
+          <Image
+            source={require('@/assets/images/family.png')}
+            style={styles.image}
+          />
         </View>
       </View>
     </View>
@@ -43,8 +49,8 @@ const styles = StyleSheet.create({
   },
   text1: {
     ...FONTS.h2,
-    // fontWeight: 'bold',
-    color: COLORS.white,
+    fontWeight: 'bold',
+    color: COLORS.darkBlueGray,
   },
   hamburger: {
     justifyContent: 'center',
@@ -78,18 +84,20 @@ const styles = StyleSheet.create({
     borderRadius: SIZES.large,
     backgroundColor: COLORS.white,
     gap: 5,
+    elevation: 2,
+    shadowColor: COLORS.black,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   text3: {
     ...FONTS.body,
     fontWeight: '600',
     color: COLORS.secondary,
   },
-  modal: {
-  },
-  modalClose: {
-    width: 40,
-    height: 40,
-    backgroundColor: '#333',
+  image: {
+    width: 150, 
+    height: 150 
   },
 });
 

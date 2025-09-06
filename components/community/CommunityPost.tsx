@@ -1,34 +1,23 @@
-// components/CommunityPost.tsx
+import { getTagColor } from '@/constants/tagColor';
 import { COLORS, FONTS, SIZES } from '@/constants/theme';
 import { Post } from '@/types';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 interface CommunityPostProps {
   post: Post;
 }
 
 const CommunityPost: React.FC<CommunityPostProps> = ({ post }) => {
-  const getTagColor = (tag: Post['tag']) => {
-    switch (tag) {
-      case '전체': return COLORS.black;
-      case '공유해요': return COLORS.secondary;
-      case '공감원해요': return COLORS.orange;
-      case '함께해요': return COLORS.green;
-      case '고수찾아요': return COLORS.darkBlue;
-      default: return COLORS.gray;
-    }
-  };
-
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container}>
       <View style={[styles.tag, { backgroundColor: getTagColor(post.tag) }]}>
         <Text style={styles.tagText}>{post.tag}</Text>
       </View>
       <Text style={styles.title}>{post.title}</Text>
       <Text style={styles.content} numberOfLines={2}>{post.content}</Text>
       <Text style={styles.author}>by {post.author}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -37,6 +26,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     padding: SIZES.medium,
     borderRadius: SIZES.medium,
+    marginHorizontal: SIZES.medium,
     marginBottom: SIZES.medium,
     elevation: 2,
     shadowColor: '#000',

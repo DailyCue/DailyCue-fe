@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 
 // 데이터 저장하고 불러올 키
-const STORAGE_KEY = '@records';
+export const STORAGE_KEY = '@records';
 
 export function useRecords() {
   const [records, setRecords] = useState<Record[]>([]);

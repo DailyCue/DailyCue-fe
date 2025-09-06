@@ -9,11 +9,11 @@ import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from "react-nati
 const { width } = Dimensions.get('window');
 
 const TAG_CONFIG: Record<string, { icon: keyof typeof Ionicons.glyphMap, color: string }> = {
-  전체: { icon: "airplane", color: COLORS.secondary },
-  공유해요: { icon: "share", color: COLORS.blueGray },
+  전체: { icon: "earth", color: COLORS.darkBlueGray },
+  공유해요: { icon: "share", color: COLORS.secondary },
   공감원해요: { icon: "beer", color: COLORS.orange },
   함께해요: { icon: "camera", color: COLORS.green },
-  고수찾아요: { icon: "time", color: COLORS.darkBlue },
+  고수찾아요: { icon: "airplane", color: COLORS.darkBlue },
 }
 
 type TagProps = {
@@ -26,7 +26,7 @@ const ChooseTag: React.FC<TagProps> = ({ activeTag, setActiveTag }) => {
   return(
     <View style={styles.tagContainer}>
         {TAGS.map(tag => {
-          const config = TAG_CONFIG[tag] || { icon: "help-circle-outline", color: COLORS.gray };
+          const config = TAG_CONFIG[tag];
           return (
             <TouchableOpacity
               key={tag}
@@ -49,6 +49,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingVertical: SIZES.medium,
     paddingHorizontal: SIZES.large,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   tag: {
     width: 50,
@@ -60,7 +62,7 @@ const styles = StyleSheet.create({
   },
   tagWrapper: {
     alignItems: 'center',
-    marginRight: SIZES.large,
+    marginHorizontal: SIZES.small,
   },
   tagIcon: {
     width: 50,
@@ -77,7 +79,7 @@ const styles = StyleSheet.create({
   },
   tagText: {
     ...FONTS.h4,
-    fontWeight: 'bold',
+    fontWeight: '700',
     color: COLORS.darkBlueGray,
   },
 })
