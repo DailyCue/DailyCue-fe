@@ -1,6 +1,7 @@
 import { COLORS, FONTS, SIZES } from '@/constants/theme';
 import { Record } from '@/types';
 import { format } from 'date-fns';
+import { router } from 'expo-router';
 import React from 'react';
 import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
@@ -11,10 +12,9 @@ const { width } = Dimensions.get('window');
 type CardSectionProps = {
   records: Record[];
   initialIndex: number;
-  onClose: () => void;
 }
 
-const CardSection: React.FC<CardSectionProps> = ({ records, initialIndex, onClose }) => {
+const CardSection: React.FC<CardSectionProps> = ({ records, initialIndex }) => {
   const renderItem = ({ item }: { item: Record }) => (
     <View style={styles.card}>
       <View style={styles.stressTextContainer}>
@@ -48,7 +48,7 @@ const CardSection: React.FC<CardSectionProps> = ({ records, initialIndex, onClos
           parallaxScrollingOffset: 130,
         }}
       />
-      <TouchableOpacity style={styles.closeButton} onPress={onClose}>
+      <TouchableOpacity style={styles.closeButton} onPress={() => router.push("/main/journal")}>
         <Text style={styles.closeText}>나가기</Text>
       </TouchableOpacity>
     </View>

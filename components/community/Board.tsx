@@ -1,3 +1,4 @@
+// ChooseTag에 따른 추천 글 + 게시글 뷰 배치 컴포넌트
 import { DUMMY_POSTS } from "@/constants/communityContents";
 import { COLORS, FONTS, SIZES } from "@/constants/theme";
 import { Post } from "@/types";

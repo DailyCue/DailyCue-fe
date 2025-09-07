@@ -27,7 +27,6 @@ const HeadScreen = () => {
           </TouchableOpacity>
         </View>
         <View style={styles.rightBody}>
-          {/* <FontAwesome6 name='people-roof' size={50} color={COLORS.white}/> */}
           <Image
             source={require('@/assets/images/family.png')}
             style={styles.image}
@@ -42,8 +41,8 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     marginHorizontal: 30,
-    marginTop: 60,
-    marginBottom: 40,
+    marginTop: 50,
+    marginBottom: 30,
     justifyContent: 'space-between',
     alignItems: 'center',
   },
@@ -66,7 +65,7 @@ const styles = StyleSheet.create({
   },
   rightBody: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'flex-end',
   },
   text2: {
@@ -97,7 +96,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 150, 
-    height: 150 
+    height: 150, 
   },
 });
 

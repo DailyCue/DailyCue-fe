@@ -74,8 +74,8 @@ const styles = StyleSheet.create({
     marginBottom: SIZES.small,
   },
   activeTag: {
-    borderWidth: 2,
-    borderColor: COLORS.primary,
+    borderWidth: 3,
+    borderColor: COLORS.darkBlueGray,
   },
   tagText: {
     ...FONTS.h4,

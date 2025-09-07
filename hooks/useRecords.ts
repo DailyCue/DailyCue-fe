@@ -47,5 +47,16 @@ export function useRecords() {
     });
   }
 
-  return { records, addRecord };
+  // 모든 기록을 삭제하는 함수
+  const clearRecords = async () => {
+    try {
+      await AsyncStorage.removeItem(STORAGE_KEY);
+      setRecords([]);
+    } catch (error) {
+      console.error('기록을 삭제하는데 실패했습니다.', error);
+    }
+  };
+
+  return { records, addRecord, clearRecords };
+
 }

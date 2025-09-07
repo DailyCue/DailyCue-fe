@@ -1,6 +1,5 @@
 // 홈 화면
 import Button from '@/components/journal/Button';
-import CardSection from '@/components/journal/CardSection';
 import HeadScreen from '@/components/journal/HeadScreen';
 import SavedRecords from '@/components/journal/SavedReords';
 import { COLORS } from '@/constants/theme';
@@ -14,17 +13,10 @@ import { SafeAreaView, StyleSheet, View } from 'react-native';
 
 export default function JournalScreen() {
   const [records, setRecords] = useState([]);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const openRecordModal = (index: number) => {
-    setSelectedIndex(index);
-    setModalVisible(true);
-  };
-
-  const closeRecordModal = () => {
-    setModalVisible(false);
-  };
+  // 주석 풀지마세요.
+  // const { clearRecords } = useRecords();
+  // clearRecords()
 
   useFocusEffect(
     useCallback(() => {
@@ -55,24 +47,15 @@ export default function JournalScreen() {
         <HeadScreen />
       </View>
       <View style={styles.body}>
-        <Button />
+        <Button count={records.length}/>
         <SavedRecords 
-          records={[]} // records 배열 형식으로 데이터를 전해줌. 
-          onRecordPress={openRecordModal} // 클릭 시 모달 열기
+          records={records} // records 배열 형식으로 데이터를 전해줌. 
         />
       </View>
       
-      {modalVisible && (
-        <CardSection
-          records={records}
-          initialIndex={selectedIndex}
-          onClose={closeRecordModal} // 버튼 누르면 닫기
-        />
-      )}
     </SafeAreaView>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -80,7 +63,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.primary,
   },
   head: {
-    flex: 1,
+    height: 350,
     justifyContent: 'center',
   },
   body: {

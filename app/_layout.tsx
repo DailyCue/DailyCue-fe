@@ -1,11 +1,11 @@
 import { Stack } from "expo-router";
-import { Drawer } from "expo-router/drawer";
 
 export default function RootLayout() {
   return (
-    <Drawer screenOptions={{ headerShown: false }}>
-      <Drawer.Screen name="main" options={{ headerShown: false }} />
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="main" />
       <Stack.Screen name="recording" options={{ presentation: "modal" }} />
-    </Drawer>
+      <Stack.Screen name="postCreation" options={{ presentation: "modal"}} />
+    </Stack>
   );
 }

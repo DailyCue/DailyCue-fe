@@ -5,8 +5,12 @@ import { router } from "expo-router";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-const Button: React.FC = () => {
-  const count = 123;
+
+interface ButtonProps {
+  count: number;
+}
+
+const Button: React.FC<ButtonProps> = ({ count }) => {
   const currentDate = format(new Date(), 'yyyy.MM.dd');
 
   return (
@@ -25,13 +29,13 @@ const Button: React.FC = () => {
 
 const styles = StyleSheet.create({
   button: {
-    height: 90,
+    height: 85,
     flexDirection: 'row',
     backgroundColor: COLORS.white,
     borderRadius: SIZES.medium,
     padding: SIZES.mega,
     marginHorizontal: 35,
-    marginBottom: 20,
+    marginBottom: 15,
     alignItems: 'center',
     justifyContent: 'space-between',
     elevation: 5,

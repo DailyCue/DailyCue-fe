@@ -1,3 +1,4 @@
+// 추천 글 + 게시판 컴포넌트
 import { COLORS, FONTS, SIZES } from "@/constants/theme";
 import { Post } from "@/types";
 import React from "react";

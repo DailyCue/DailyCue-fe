@@ -10,7 +10,6 @@ import { FlatList } from 'react-native-gesture-handler';
 const MessagePart = () => {
   const [input, setInput] = useState<string>('');
   const [messages, setMessages] = useState<Message[]>(SET_MESSAGE);
-  const currentTime = format(new Date(), 'p'); // ex) 1:15 AM
   
   const onSend = useCallback(() => {
     if (input.trim().length > 0) {
@@ -18,7 +17,7 @@ const MessagePart = () => {
         id: Date.now().toString(), 
         text: input, 
         user: true,
-        createdAt: currentTime
+        createdAt: format(new Date(), 'p'), // ex) 1:15 AM
       };
       setMessages(prev => [newMessage, ...prev]);
       setInput('');
@@ -28,7 +27,7 @@ const MessagePart = () => {
           id: (Date.now() + 1).toString(), 
           text: '조금 더 자세히 말씀해주시겠어요?', 
           user: false,
-          createdAt: currentTime 
+          createdAt: format(new Date(), 'p'),
         };
         setMessages(prev => [aiResponse, ...prev]);
       }, 1000);
@@ -39,7 +38,7 @@ const MessagePart = () => {
     <View>
       {item.user ? (
         <View style={styles.user}>
-          <Text style={styles.time}>{currentTime}</Text>
+          <Text style={styles.time}>{item.createdAt}</Text>
           <View style={styles.userMessageContainer}>
             <Text style={styles.userMessageText}>{item.text}</Text>
           </View>
@@ -49,7 +48,7 @@ const MessagePart = () => {
           <View style={styles.aiMessageContainer}>
             <Text style={styles.aiMessageText}>{item.text}</Text>
           </View>
-          <Text style={styles.time}>{currentTime}</Text>
+          <Text style={styles.time}>{item.createdAt}</Text>
         </View>
       )}
     </View>
@@ -110,7 +109,7 @@ const styles = StyleSheet.create({
   },
   aiMessageContainer: {
     backgroundColor: COLORS.white,
-    borderWidth: 1,
+    borderWidth: 0.3,
     borderColor: COLORS.gray,
     borderBottomLeftRadius: 0,
     paddingHorizontal: SIZES.medium,

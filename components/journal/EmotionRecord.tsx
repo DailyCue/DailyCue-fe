@@ -75,7 +75,7 @@ const EmotionRecord: React.FC<EmotionRecordProps> = ({ onRecordAdded }) => {
         style={styles.textInput}
         placeholder="어떤 일이 있었나요?"
         multiline
-        maxLength={50}
+        maxLength={100}
         value={text}
         onChangeText={setText}
       />

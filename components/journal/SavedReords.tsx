@@ -1,79 +1,91 @@
-// 타임라인 + 하얀 배경 뷰
-import { COLORS, FONTS, SIZES } from '@/constants/theme';
-import { Record } from '@/types';
-import React from 'react';
-import { StyleSheet, Text, View } from "react-native";
-import Timeline from "react-native-timeline-flatlist";
+// SavedRecords.tsx
 
-// recording.tsx 만들 것인가 고민해보기
-type SavedRecordsProps = {
+import { COLORS, FONTS, SIZES } from "@/constants/theme";
+import { Record } from '@/types'; // (types.ts 파일에 Record 타입이 정의되어 있어야 함)
+import { isSameDay } from 'date-fns';
+import React, { useState } from 'react';
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+import CalendarStrip from "./CalenderStrip";
+
+interface SavedRecordsProps {
   records: Record[];
-  onRecordPress?: (index: number) => void;
 }
 
-export const SavedRecords: React.FC<SavedRecordsProps> = ({ records, onRecordPress }) => {
-  if (!records.length) {
-    return (
-      <View style={styles.emptyContainer}>
-        <Text style={styles.emptyText}>아직 작성된 기록이 없어요.</Text>
-      </View>
-    );
-  }
+export const SavedRecords: React.FC<SavedRecordsProps> = ({ records }) => {
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
-  const data = records.map((record, index) => ({
-    time: record.createdAt ? record.createdAt.slice(5, 10) : '',
-    title: record.stress ? `나의 감정 지수: ${record.stress}` : '기록',
-    description: record.content,
-    lineColor: COLORS.gray,
-    circleColor: COLORS.secondary,
-    onPress: () => onRecordPress?.(index),
-  }));
+  // 1. 선택된 날짜에 해당하는 첫 번째 기록 찾기
+  const recordForSelectedDay = records.find(record =>
+    record.createdAt && isSameDay(new Date(record.createdAt), selectedDate)
+  );
 
   return (
-    <View style={styles.listContainer}>
-      <Timeline
-        style={{ marginHorizontal: 10, marginTop: 30 }}
-        data={data}
-        circleSize={15}
-        innerCircle="dot"
-        separator={true}
-        timeStyle={{ ...FONTS.h4, color: COLORS.gray }}
-        titleStyle={{ fontSize: 13, paddingTop: 5, color: COLORS.darkBlueGray }}
+    // 2. 부모 컨테이너에 마진 적용 (예: marginHorizontal: 25)
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      <CalendarStrip
+        selectedDate={selectedDate}
+        onDateChange={setSelectedDate}
       />
-    </View>
+
+      {/* 3. 단일 기록 표시 영역 */}
+      <View style={styles.recordDisplayArea}>
+        {recordForSelectedDay ? (
+          <View style={styles.recordItem}>
+            <Text style={styles.recordContent}>{recordForSelectedDay.content}</Text>
+            <Text style={styles.recordTitle}>
+              {recordForSelectedDay.stress ? `나의 감정 지수: ${recordForSelectedDay.stress}` : '기록'}
+            </Text>
+          </View>
+        ) : (
+          <View style={styles.emptyView}>
+            <Text style={styles.emptyText}>선택한 날짜에 기록이 없습니다.</Text>
+          </View>
+        )}
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  listContainer: {
-    height: 265,
+  container: {
+    flex: 1,
+    marginHorizontal: 25, // 부모에서 여백 설정
+    paddingHorizontal: 10,
     backgroundColor: COLORS.white,
-    marginHorizontal: 35,
     borderTopLeftRadius: SIZES.large,
     borderTopRightRadius: SIZES.large,
     elevation: 5,
     shadowColor: COLORS.black,
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-  },
-  emptyContainer: {
-    height: 265,
-    backgroundColor: COLORS.white,
-    marginHorizontal: 35,
-    borderTopLeftRadius: SIZES.large,
-    borderTopRightRadius: SIZES.large,
-    alignItems: 'center',
-    justifyContent: 'center',
-    elevation: 2,
-    shadowColor: COLORS.black,
-    shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
-    shadowRadius: 2,
+    shadowRadius: 4,
+  },
+  recordDisplayArea: {
+    padding: SIZES.small,
+  },
+  recordItem: {
+    // borderWidth: 0.5,
+    // borderRadius: SIZES.small,
+    // borderColor: COLORS.darkBlueGray,
+    padding: SIZES.medium,
+  },
+  recordTitle: {
+    ...FONTS.h4,
+    fontWeight: 'bold',
+  },
+  recordContent: {
+    fontSize: 15,
+    color: COLORS.darkGray,
+    marginBottom: SIZES.medium,
+  },
+  emptyView: {
+    padding: SIZES.medium,
+    alignItems: 'center',
+    backgroundColor: '#ff1'
   },
   emptyText: {
     fontSize: SIZES.h3,
-    color: COLORS.darkGray
+    color: COLORS.darkGray,
   },
 });
 
