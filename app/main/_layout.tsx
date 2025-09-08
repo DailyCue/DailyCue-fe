@@ -27,7 +27,7 @@ export default function TabLayout() {
         options={{
           title: "홈",
           tabBarIcon: ({ color, size }) => (
-            <Feather name="heart" size={size - 3} color={color} />
+            <Feather name="home" size={size - 3} color={color} />
           ),
         }}
       />
@@ -46,6 +46,15 @@ export default function TabLayout() {
           title: "AI 챗봇",
           tabBarIcon: ({ color, size }) => (
             <Feather name="message-circle" size={size - 3} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="summary"
+        options={{
+          title: "리포트",
+          tabBarIcon: ({ color, size }) => (
+            <Feather name="file" size={size - 3} color={color} />
           ),
         }}
       />

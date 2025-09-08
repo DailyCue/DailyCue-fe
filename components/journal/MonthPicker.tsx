@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginHorizontal: SIZES.small,
     marginTop: 7,
+    transform: [{ scale: 1 }],
   },
   picker: {
     ...FONTS.h3,

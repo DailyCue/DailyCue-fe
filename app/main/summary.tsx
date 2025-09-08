@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
 
-export default function Setting() {
+export default function SummaryScreen() {
   return (
     <View style={styles.container}>
-      <Text>설정 화면</Text>
+      <Text>AI 챗봇과의 대화과 이 화면에 파일로 저장됩니다.</Text>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({

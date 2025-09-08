@@ -64,27 +64,23 @@ const styles = StyleSheet.create({
     padding: SIZES.small,
   },
   recordItem: {
-    // borderWidth: 0.5,
-    // borderRadius: SIZES.small,
-    // borderColor: COLORS.darkBlueGray,
-    padding: SIZES.medium,
+    padding: SIZES.small,
   },
   recordTitle: {
     ...FONTS.h4,
     fontWeight: 'bold',
   },
   recordContent: {
-    fontSize: 15,
+    fontSize: 14,
     color: COLORS.darkGray,
     marginBottom: SIZES.medium,
   },
   emptyView: {
-    padding: SIZES.medium,
+    paddingTop: 30,
     alignItems: 'center',
-    backgroundColor: '#ff1'
   },
   emptyText: {
-    fontSize: SIZES.h3,
+    fontSize: 14,
     color: COLORS.darkGray,
   },
 });
